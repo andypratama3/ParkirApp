@@ -22,8 +22,8 @@
       <li class="nav-item nav-category">
         <span class="nav-link">Dashboard</span>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="index.html">
+      <li class="nav-item {{ Request::routeIs('admin.index') ? 'active' : '' }}" href="{{ route('admin.index') }}">
+        <a class="nav-link">
           <span class="menu-title">Dashboard</span>
           <i class="icon-screen-desktop menu-icon"></i>
         </a>
@@ -42,16 +42,17 @@
           </ul>
         </div>
       </li> --}}
-      <li class="nav-item">
-        <a class="nav-link" data-bs-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
-          <span class="menu-title">Data Pengguna</span>
-          <i class="icon-globe menu-icon"></i>
+      <li class="nav-item {{ Request::routeIs('admin.parkirs.*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('admin.parkirs.index') }}">
+            <span>Data Pengguna Parkir</span>
+            <i class="icon-layers menu-icon"></i>
         </a>
-        <div class="collapse" id="icons">
-          <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link" href="{{ route('admin.parkirs.index') }}">Data Parkir</a></li>
-          </ul>
-        </div>
+      </li>
+      <li class="nav-item {{ Request::routeIs('admin.users.*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('admin.users.index') }}">
+            <span>Data Pengguna</span>
+            <i class="icon-user menu-icon"></i>
+        </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" data-bs-toggle="collapse" href="#forms" aria-expanded="false" aria-controls="forms">

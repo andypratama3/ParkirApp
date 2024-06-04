@@ -10,7 +10,7 @@
       </button>
     </div>
     <div class="navbar-menu-wrapper d-flex align-items-center">
-      <h5 class="mb-0 font-weight-medium d-none d-lg-flex">Welcome stellar dashboard!</h5>
+      <h5 class="mb-0 font-weight-medium d-none d-lg-flex">Welcome Dashboard Admin!</h5>
       <ul class="navbar-nav navbar-nav-right">
         <form class="search-form d-none d-md-block" action="#">
           <i class="icon-magnifier"></i>
@@ -89,7 +89,14 @@
             <a class="dropdown-item"><i class="dropdown-item-icon icon-speech text-primary"></i> Messages</a>
             <a class="dropdown-item"><i class="dropdown-item-icon icon-energy text-primary"></i> Activity</a>
             <a class="dropdown-item"><i class="dropdown-item-icon icon-question text-primary"></i> FAQ</a>
-            <a class="dropdown-item"><i class="dropdown-item-icon icon-power text-primary"></i>Sign Out</a>
+
+            <form action="{{ route('logout') }}" method="POST">
+                @csrf
+                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();" >
+                <i class="dropdown-item-icon icon-power text-primary"></i>Sign Out
+            </form>
+
+            </a>
           </div>
         </li>
       </ul>

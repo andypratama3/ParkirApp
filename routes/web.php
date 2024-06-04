@@ -3,9 +3,10 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LandingController;
-use App\Http\Controllers\ParkirController;
 use App\Http\Controllers\Admin\DashboardController;
 use Inertia\Inertia;
+use App\Http\Controllers\Admin\UserController as DashboardUserController;
+use App\Http\Controllers\Admin\ParkirController as DashboardParkirController;
 
 // Route::get('/', function () {
 //     return Inertia::render('Welcome', [
@@ -20,7 +21,13 @@ use Inertia\Inertia;
 Route::get('/', [LandingController::class, 'index'])->name('landing.index');
 
 Route::get('/admin', DashboardController::class,)->name('admin.index');
-Route::resource('/parkirs', ParkirController::class, ['names' => 'admin.parkirs']);
+
+Route::group(['prefix' => 'admin'], function () {
+    Route::resource('/parkirs', DashboardParkirController::class, ['names' => 'admin.parkirs']);
+    Route::resource('/users', DashboardUserController::class, ['names' => 'admin.users']);
+});
+
+
 // Route::middleware([
 //     'auth:sanctum',
 //     config('jetstream.auth_session'),
