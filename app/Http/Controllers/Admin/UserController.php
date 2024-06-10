@@ -19,9 +19,9 @@ class UserController extends Controller
         return view('admin.users.create');
     }
 
-    public function edit()
+    public function edit(User $user)
     {
-        return view('admin.users.edit');
+        return view('admin.users.edit', compact('user'));
     }
 
     public function update()
@@ -34,8 +34,9 @@ class UserController extends Controller
         return view('admin.users.show');
     }
 
-    public function destroy()
+    public function destroy(User $user)
     {
-
+        $user->delete();
+        return redirect()->route('admin.users.index');
     }
 }

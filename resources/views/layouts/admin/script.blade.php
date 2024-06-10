@@ -21,4 +21,7 @@
     <!-- Custom js for this page -->
     <script src="{{ asset('asset_admin/js/dashboard.js') }}"></script>
     <!-- End custom js for this page -->
+    {{-- Js --}}
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.js" integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @stack('js')

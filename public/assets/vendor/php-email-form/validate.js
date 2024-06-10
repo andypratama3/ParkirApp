@@ -16,7 +16,7 @@
 
       let action = thisForm.getAttribute('action');
       let recaptcha = thisForm.getAttribute('data-recaptcha-site-key');
-      
+
       if( ! action ) {
         displayError(thisForm, 'The form action property is not set!');
         return;
@@ -51,30 +51,40 @@
 
   function php_email_form_submit(thisForm, action, formData) {
     fetch(action, {
-      method: 'POST',
-      body: formData,
-      headers: {'X-Requested-With': 'XMLHttpRequest'}
+        method: 'POST',
+        body: formData,
+        headers: {'X-Requested-With': 'XMLHttpRequest'}
     })
     .then(response => {
-      if( response.ok ) {
-        return response.text();
-      } else {
-        throw new Error(`${response.status} ${response.statusText} ${response.url}`); 
-      }
+        if (response.ok) {
+            return response.json(); // Parse response as JSON
+        } else if (response.status === 401) {
+            return response.json().then(data => {
+                window.location.href = data.redirect; // Redirect to the URL specified in the response
+            });
+        } else {
+            throw new Error('Form submission failed');
+        }
     })
     .then(data => {
-      thisForm.querySelector('.loading').classList.remove('d-block');
-      if (data.trim() == 'OK') {
-        thisForm.querySelector('.sent-message').classList.add('d-block');
-        thisForm.reset(); 
-      } else {
-        throw new Error(data ? data : 'Form submission failed and no error message returned from: ' + action); 
-      }
+        thisForm.querySelector('.loading').classList.remove('d-block');
+        if (data.hasOwnProperty('message')) {
+            // Display success message if present
+            thisForm.querySelector('.sent-message').textContent = data.message;
+            thisForm.querySelector('.sent-message').classList.add('d-block');
+            thisForm.reset();
+        } else {
+            throw new Error('Form submission failed and no error message returned');
+        }
     })
-    .catch((error) => {
-      displayError(thisForm, error);
+    .catch(error => {
+        if (error.message) {
+            displayError(thisForm, error.message); // Display the error message
+        } else {
+            displayError(thisForm, 'Form submission failed and no error message returned');
+        }
     });
-  }
+}
 
   function displayError(thisForm, error) {
     thisForm.querySelector('.loading').classList.remove('d-block');

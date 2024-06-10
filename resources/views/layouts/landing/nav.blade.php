@@ -12,10 +12,10 @@
         <ul>
           <li><a href="#hero" class="">Home<br></a></li>
           <li><a href="#visi_misi">Visi Misi</a></li>
-          <li><a href="#services">Struktur Organisasi</a></li>
-          <li><a href="#portfolio">Kebijakan</a></li>
-          <li><a href="#team">Lokasi Parkir</a></li>
-          <li><a href="#contact">Kontak</a></li>
+          <li><a href="#struktur-organisasi">Struktur Organisasi</a></li>
+          <li><a href="#kebijakan">Kebijakan</a></li>
+          <li><a href="#lokasi-parkir">Lokasi Parkir</a></li>
+          <li><a href="#kontak">Kontak</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>

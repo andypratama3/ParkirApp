@@ -13,6 +13,10 @@ class ParkirController extends Controller
     {
         $limit = 20;
         $parkirs = Parkir::orderBy('name','asc')->paginate($limit);
+
+        // if($request->any() && $request->limit) {
+
+        // }
         return view('admin.parkir.index', compact('parkirs', 'limit'));
     }
 
@@ -115,6 +119,6 @@ class ParkirController extends Controller
     public function destroy(Parkir $parkir)
     {
         $parkir->delete();
-        return redirect()->route('admin.parkirs.index')->with('success','Berhasil Menghapus Data');
+        return redirect()->route('admin.parkirs.index');
     }
 }

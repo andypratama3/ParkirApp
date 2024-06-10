@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Login Page</title>
+    <title>Register Page</title>
     <!-- plugins:css -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{ asset('asset_admin/vendors/simple-line-icons/css/simple-line-icons.css') }}">
@@ -58,7 +58,7 @@
                                         type="submit">SIGN UP</button>
                                 </div>
                                 <div class="text-center mt-4 font-weight-light"> Already have an account? <a
-                                        href="login.html" class="text-primary">Login</a>
+                                        href="{{ route('login') }}" class="text-primary">Login</a>
                                 </div>
                             </form>
                         </div>

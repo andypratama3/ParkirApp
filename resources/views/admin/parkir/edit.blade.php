@@ -151,8 +151,8 @@
 
                 </div>
                 <div class="col-md-12">
-                    <a href="{{ route('admin.parkirs.index') }}" class="btn btn-danger float-start">Kembali</a>
-                    <button type="submit" class="btn btn-primary float-end">Submit</button>
+                    <a href="{{ route('admin.parkirs.index') }}" class="btn btn-danger btn-sm float-start">Kembali</a>
+                    <button type="submit" class="btn btn-primary btn-sm float-end">Submit</button>
                 </div>
             </form>
         </div>
