@@ -1,21 +1,20 @@
 @extends('layouts.admin')
-@section('title', 'Edit')
+@section('title', 'Tambah')
 @section('content')
 <div class="col-md-12">
     <div class="card">
         <div class="card-header">
-            <h4>Edit Data </h4>
+            <h4>Tambah Data</h4>
         </div>
 
         <div class="card-body">
-            <form action="{{ route('admin.parkirs.update', $parkir->slug) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.parkirs.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                @method('PUT')
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="name">Nama</label>
-                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name', $parkir->name) }}">
+                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}">
                             @error('name')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -27,7 +26,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="nik">NIK</label>
-                            <input type="text" name="nik" class="form-control @error('nik') is-invalid @enderror" value="{{ old('nik', $parkir->nik) }}">
+                            <input type="text" name="nik" class="form-control @error('nik') is-invalid @enderror" value="{{ old('nik') }}">
                             @error('nik')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -44,7 +43,7 @@
                                     <span class="input-group-text font-weight-bold" id="basic-addon1"
                                         style="color: black;">KT</span>
                                 </div>
-                                <input type="text" class="form-control @error('plat') is-invalid @enderror" name="plat" value="{{ old('plat', $parkir->nik) }}">
+                                <input type="text" class="form-control @error('plat') is-invalid @enderror" name="plat" value="{{ old('plat') }}">
                                 @error('plat')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -57,25 +56,19 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Stnk</label>
-                            <div class="input-group">
-                                <input type="file" name="stnk" class="form-control @error('stnk') is-invalid @enderror" accept="image/*" value="{{ old('stnk', $parkir->stnk) }}">
+                            <input type="file" name="stnk" class="form-control @error('stnk') is-invalid @enderror" accept="image/*" value="{{ old('stnk') }}">
                             @error('stnk')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
                             @enderror
-                                <div class="input-group-prepend">
-                                    <a target="__blank" href="{{ asset('storage/stnk/'.$parkir->stnk) }}" class="input-group-text font-weight-bold" style="color: black;">Lihat Foto</a>
-                                </div>
-                            </div>
-
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Warna</label>
-                            <input type="text" name="warna" class="form-control @error('warna') is-invalid @enderror" value="{{ old('warna', $parkir->warna) }}">
+                            <input type="text" name="warna" class="form-control @error('warna') is-invalid @enderror" value="{{ old('warna') }}">
                             @error('warna')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -87,7 +80,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="tanggal_lahir">Tanggal Lahir</label>
-                            <input type="date" name="tanggal_lahir" class="form-control @error('tanggal_lahir') is-invalid @enderror" value="{{ old('tanggal_lahir', $parkir->tanggal_lahir) }}">
+                            <input type="date" name="tanggal_lahir" class="form-control @error('tanggal_lahir') is-invalid @enderror" value="{{ old('tanggal_lahir') }}">
                             @error('tanggal_lahir')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -99,7 +92,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="hp">No. Hp</label>
-                            <input type="text" name="hp" class="form-control @error('hp') is-invalid @enderror" value="{{ old('hp', $parkir->hp) }}">
+                            <input type="text" name="hp" class="form-control @error('hp') is-invalid @enderror" value="{{ old('hp') }}">
                             @error('hp')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -111,7 +104,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="alamat">Alamat</label>
-                            <input type="text" name="alamat" class="form-control @error('alamat') is-invalid @enderror" value="{{ old('alamat', $parkir->alamat) }}">
+                            <input type="text" name="alamat" class="form-control @error('alamat') is-invalid @enderror" value="{{ old('alamat') }}">
                             @error('alamat')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -123,12 +116,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="status">Status</label>
-                            <select name="status" id="status" class="form-control">
-                                <option value="" disabled {{ old('status', $parkir->status) ? '' : 'selected' }}>{{ $parkir->status ? 'Pilih Status' : 'Status'  }}</option>
-                                <option value="active" {{ old('status', $parkir->status) === 'active' ? 'selected' : '' }}>Aktif</option>
-                                <option value="pending" {{ old('status', $parkir->status) === 'pending' ? 'selected' : '' }}>Pending</option>
-                                <option value="reject " {{ old('status', $parkir->status) === 'reject ' ? 'selected' : '' }}>Reject</option>
-                            </select>
+                            <input type="text" name="status" class="form-control @error('status') is-invalid @enderror" value="{{ old('status') }}">
                             @error('status')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -141,10 +129,10 @@
                         <div class="form-group">
                             <label for="tipe_roda">Tipe Roda</label>
                             <select name="tipe_roda" id="tipe_roda" class="form-control form-select @error('tipe_roda') is-invalid @enderror" style="width: 100%;">
-                                <option value="" disabled {{ old('tipe_roda', $parkir->tipe_roda) ? '' : 'selected' }}>{{ $parkir->tipe_roda ? 'Pilih Tipe Roda' : 'Tipe Roda'  }}</option>
-                                <option value="2" {{ old('tipe_roda', $parkir->tipe_roda) === '2' ? 'selected' : '' }}>2</option>
-                                <option value="4" {{ old('tipe_roda',$parkir->tipe_roda) === '4' ? 'selected' : '' }}>4</option>
-                                <option value="6" {{ old('tipe_roda',$parkir->tipe_roda) === '6' ? 'selected' : '' }}>6</option>
+                                <option value="" disabled {{ old('tipe_roda') ? '' : 'selected' }}>Pilih Tipe Roda</option>
+                                <option value="2" {{ old('tipe_roda') === '2' ? 'selected' : '' }}>2</option>
+                                <option value="4" {{ old('tipe_roda') === '4' ? 'selected' : '' }}>4</option>
+                                <option value="6" {{ old('tipe_roda') === '6' ? 'selected' : '' }}>6</option>
                             </select>
                             @error('tipe_roda')
                                 <div class="invalid-feedback">
@@ -156,8 +144,8 @@
 
                 </div>
                 <div class="col-md-12">
-                    <a href="{{ route('admin.parkirs.index') }}" class="btn btn-danger btn-sm float-start">Kembali</a>
-                    <button type="submit" class="btn btn-primary btn-sm float-end">Submit</button>
+                    <a href="{{ route('admin.parkirs.index') }}" class="btn btn-danger float-start">Kembali</a>
+                    <button type="submit" class="btn btn-primary float-end">Submit</button>
                 </div>
             </form>
         </div>

@@ -10,7 +10,7 @@ class ParkirController extends Controller
     public function index()
     {
         if(Auth::check()) {
-            $parkir = Parkir::where('user_id', Auth::id())->get();
+            $parkir = Parkir::where('user_id', Auth::id())->first();
             return view('parkir.index', compact('parkir'));
         }else {
             return redirect()->route('login')->with('errro','Silahkan Login Terlebih Dahulu');
@@ -29,6 +29,7 @@ class ParkirController extends Controller
             'alamat' => 'required',
             'tipe_roda' => 'required',
             'stnk' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|required',
+            'foto_pembayaran' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|required',
 
         ]);
 
@@ -42,6 +43,14 @@ class ParkirController extends Controller
             $foto_stnk->storeAs('public/stnk', $picture_name);
         }
 
+        $foto_pembayaran = $request->foto_pembayaran;
+
+        if($foto_pembayaran) {
+            $ext = $foto_pembayaran->getClientOriginalExtension();
+            $picture_name_pembayaran = 'Pembayaran_'.$request->name.'.'.$ext;
+            $foto_pembayaran->storeAs('public/pembayaran', $picture_name_pembayaran);
+        }
+
         $parkir->name = $request->name;
         $parkir->nik = $request->nik;
         $parkir->plat = $request->plat;
@@ -50,8 +59,9 @@ class ParkirController extends Controller
         $parkir->tanggal_lahir = $request->tanggal_lahir;
         $parkir->hp = $request->hp;
         $parkir->alamat = $request->alamat;
-        $parkir->status = $request->status;
+        $parkir->status = 'pending';
         $parkir->tipe_roda = $request->tipe_roda;
+        $parkir->foto_pembayaran = $picture_name_pembayaran;
         $parkir->user_id = Auth::id();
         $parkir->save();
 

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->longText('alamat');
             $table->string('status');
             $table->string('tipe_roda');
+            $table->string('foto_pembayaran');
             $table->foreignUuid('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('slug');
             $table->softDeletes();

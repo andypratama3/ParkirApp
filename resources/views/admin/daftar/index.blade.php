@@ -1,30 +1,28 @@
 @extends('layouts.admin')
-@section('title', 'Dashboard')
+@section('title', 'Pendaftar Parkir')
 
 @section('content')
 <div class="col-md-12">
     <div class="card">
         <div class="card-header" style="background-color:  none !important;">
-            <h5>Data Pengguna Parkir Berbayar</h5>
+            <h5>Data Pendaftar Parkir Berbayar</h5>
         </div>
 
         <div class="card-body">
             <div class="row">
                 <div class="col-md-6">
-                    <form action="{{ route('admin.parkirs.index') }}" method="GET">
+                    <form action="{{ route('admin.pendaftar.parkir.index') }}" method="GET">
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">Cari...</span>
+
                             <input type="text" name="search" value="{{ old('search') }}" class="form-control"
                                 placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
                             <button class="btn btn-warning btn-sm" type="submit"><i class="fa fa-search"></i></button>
                         </div>
-                    </form>
                 </div>
-                <div class="col-md-3">
-                    <a href="{{ route('admin.parkir.export') }}" class="btn btn-success"><i class="fa fa-solid fa-file-excel">Excel</i></a>
-                </div>
-                <div class="col-md-3 mb-2">
-                    <a href="{{ route('admin.parkirs.create') }}" class="btn btn-primary btn-sm float-end"><i
+                </form>
+                <div class="col-md-6 mb-2">
+                    <a href="{{ route('admin.pendaftar.parkir.create') }}" class="btn btn-primary btn-sm float-end"><i
                             class="fa fa-plus">Tambah</i></a>
                 </div>
 
@@ -58,18 +56,18 @@
                                 @endif
                             </td>
                             <td>
-                                <a href="{{ route('admin.parkirs.show', $parkir->slug) }}"
+                                <a href="{{ route('admin.pendaftar.parkir.show', $parkir->slug) }}"
                                     class="btn btn-sm btn-warning"><i class="fa fa-eye"></i></a>
-                                <a href="{{ route('admin.parkirs.edit', $parkir->slug) }}"
+                                <a href="{{ route('admin.pendaftar.parkir.edit', $parkir->slug) }}"
                                     class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
                                  <a href="#" data-id="{{ $parkir->slug }}" class="btn btn-danger btn-sm delete"
                                     title="Hapus">
-                                    <form action="{{ route('admin.parkirs.destroy', $parkir->slug) }}"
+                                    <form action="{{ route('admin.pendaftar.parkir.destroy', $parkir->slug) }}"
                                         id="delete-{{ $parkir->slug }}" method="POST" enctype="multipart/form-data">
                                         @csrf
                                         @method('delete')
                                     </form>
-                                    <i class="fas fa-trash"></i>
+                                    <i class="fa fa-trash"></i>
                             </td>
                         </tr>
                         @empty

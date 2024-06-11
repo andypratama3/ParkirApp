@@ -5,15 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Parkir;
-use Illuminate\Support\Facades\Auth;
-use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\ParkirExport;
-class ParkirController extends Controller
+class DaftarPrakirController extends Controller
 {
     public function index(Request $request)
     {
-        $limit = 20;
-        $parkirs = Parkir::where('status', 'active');
+        $limit = request(15);
+        $parkirs = Parkir::where('status', 'pending');
 
         if($request->search){
             $parkirs->where('name', 'like', '%' . $request->any . '%');
@@ -21,13 +18,7 @@ class ParkirController extends Controller
 
         }
         $parkirs = $parkirs->orderBy('name','asc')->paginate($limit);
-
-        return view('admin.parkir.index', compact('parkirs', 'limit'));
-    }
-
-    public function create()
-    {
-        return view('admin.parkir.create');
+        return view('admin.daftar.index', compact('parkirs'));
     }
 
     public function store(Request $request)
@@ -68,17 +59,19 @@ class ParkirController extends Controller
         $parkir->user_id = Auth::id();
         $parkir->save();
 
-        return redirect()->route('admin.parkirs.index')->with('success','Berhasil Menyimpan Data');
+        return redirect()->route('admin.pendaftar.parkir.index')->with('success','Berhasil Menyimpan Data');
     }
 
-    public function show(Parkir $parkir)
+    public function show($slug)
     {
-        return view('admin.parkir.show', compact('parkir'));
+        $parkir = Parkir::where('slug', $slug)->firstOrFail();
+        return view('admin.daftar.show', compact('parkir'));
     }
 
-    public function edit(Parkir $parkir)
+    public function edit($slug)
     {
-        return view('admin.parkir.edit', compact('parkir'));
+        $parkir = Parkir::where('slug', $slug)->firstOrFail();
+        return view('admin.daftar.edit', compact('parkir'));
     }
 
     public function update(Request $request,Parkir $parkir)
@@ -118,7 +111,7 @@ class ParkirController extends Controller
         $parkir->user_id = Auth::id();
         $parkir->update();
 
-        return redirect()->route('admin.parkirs.index')->with('success','Berhasil Update Data');
+        return redirect()->route('admin.pendaftar.parkir.index')->with('success','Berhasil Update Data');
     }
 
     public function destroy($slug)
@@ -128,8 +121,4 @@ class ParkirController extends Controller
 
     }
 
-    public function export()
-    {
-        return Excel::download(new ParkirExport, 'parkir.xlsx');
-    }
 }

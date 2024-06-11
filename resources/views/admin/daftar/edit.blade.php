@@ -120,22 +120,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="status">Status</label>
-                            <select name="status" id="status" class="form-control">
-                                <option value="" disabled {{ old('status', $parkir->status) ? '' : 'selected' }}>{{ $parkir->status ? 'Pilih Status' : 'Status'  }}</option>
-                                <option value="active" {{ old('status', $parkir->status) === 'active' ? 'selected' : '' }}>Aktif</option>
-                                <option value="pending" {{ old('status', $parkir->status) === 'pending' ? 'selected' : '' }}>Pending</option>
-                                <option value="reject " {{ old('status', $parkir->status) === 'reject ' ? 'selected' : '' }}>Reject</option>
-                            </select>
-                            @error('status')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                    </div>
+
 
                     <div class="col-md-6">
                         <div class="form-group">
@@ -153,6 +138,40 @@
                             @enderror
                         </div>
                     </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="status">Status</label>
+                            <select name="status" id="status" class="form-control">
+                                <option value="" disabled {{ old('status', $parkir->status) ? '' : 'selected' }}>{{ $parkir->status ? 'Pilih Status' : 'Status'  }}</option>
+                                <option value="active" {{ old('status', $parkir->status) === 'active' ? 'selected' : '' }}>Aktif</option>
+                                <option value="pending" {{ old('status', $parkir->status) === 'pending' ? 'selected' : '' }}>Pending</option>
+                                <option value="reject " {{ old('status', $parkir->status) === 'reject ' ? 'selected' : '' }}>Reject</option>
+                            </select>
+                            @error('status')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Foto Pembayaran</label>
+                            <div class="input-group">
+                                <input type="file" name="stnk" readonly accept="image/*" value="{{ old('stnk') }}">
+                                <div class="input-group-prepend">
+                                    <a target="__blank" href="{{ asset('storage/pembayaran/'.$parkir->foto_pembayaran ?? '') }}" class="input-group-text font-weight-bold" id="basic-addon1"
+                                        style="color: black;">Lihat Foto Pembayaran</a>
+                                </div>
+                            </div>
+                            @error('stnk')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+                    </div>
+
 
                 </div>
                 <div class="col-md-12">

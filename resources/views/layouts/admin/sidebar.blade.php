@@ -6,18 +6,18 @@
         <li class="nav-item nav-profile">
             <a href="#" class="nav-link">
                 <div class="profile-image">
-                    <img class="img-xs rounded-circle" src="{{ asset('asset_admin/images/faces/face8.jpg') }}"
+                    {{-- <img class="img-xs rounded-circle" src="{{ asset('asset_admin/images/faces/face8.jpg') }}"
                         alt="profile image">
-                    <div class="dot-indicator bg-success"></div>
+                    <div class="dot-indicator bg-success"></div> --}}
                 </div>
                 <div class="text-wrapper">
-                    <p class="profile-name">Henry Klein</p>
-                    <p class="designation">Administrator</p>
+                    <p class="profile-name">{{ Auth::user()->name }}</p>
+                    <p class="designation">{{ Auth::user()->role }}</p>
                 </div>
-                <div class="icon-container">
+                {{-- <div class="icon-container">
                     <i class="icon-bubbles"></i>
                     <div class="dot-indicator bg-danger"></div>
-                </div>
+                </div> --}}
             </a>
         </li>
         <li class="nav-item nav-category">
@@ -43,6 +43,13 @@
           </ul>
         </div>
       </li> --}}
+      <li class="nav-item {{ Request::routeIs('admin.pendaftar.parkir.*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('admin.pendaftar.parkir.index') }}">
+            <span>Data Pendaftar Parkir</span>
+            <i class="icon-list menu-icon"></i>
+        </a>
+    </li>
+
         <li class="nav-item {{ Request::routeIs('admin.parkirs.*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('admin.parkirs.index') }}">
                 <span>Data Pengguna Parkir</span>
@@ -56,8 +63,8 @@
             </a>
         </li>
 
-        <li class="nav-item {{ Request::routeIs('admin.users.*') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ route('admin.users.index') }}">
+        <li class="nav-item {{ Request::routeIs('admin.kritik.*') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('admin.kritik.index') }}">
                 <span>Kritik Dan Saran</span>
                 <i class="icon-mail menu-icon"></i>
             </a>

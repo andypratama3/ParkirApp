@@ -7,10 +7,11 @@ use App\Http\Controllers\Admin\DashboardController;
 use Inertia\Inertia;
 use App\Http\Controllers\ParkirController;
 use App\Http\Controllers\KritikSaranController;
-use App\Http\Controllers\Admin\KritikSaranController as DashboardKritikSaranController;
+use App\Http\Controllers\Admin\KritikSaranController as AdminKritikSaranController;
+use App\Http\Controllers\Admin\DaftarPrakirController;
 
-use App\Http\Controllers\Admin\UserController as DashboardUserController;
-use App\Http\Controllers\Admin\ParkirController as DashboardParkirController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\Admin\ParkirController as AdminParkirController;
 use App\Http\Controllers\ProfileController;
 
 // Route::get('/', function () {
@@ -39,10 +40,11 @@ Route::group(['prefix' => 'profile'], function () {
 });
 
 Route::group(['prefix' => 'admin'], function () {
-
-    Route::resource('/parkirs', DashboardParkirController::class, ['names' => 'admin.parkirs']);
-    Route::resource('/users', DashboardUserController::class, ['names' => 'admin.users']);
-    Route::resource('/kritik-saran', DashboardKritikSaranController::class, ['names' => 'admin.kritik']);
+    Route::resource('/pandaftar-parkirs', DaftarPrakirController::class, ['names' => 'admin.pendaftar.parkir']);
+    Route::resource('/parkirs', AdminParkirController::class, ['names' => 'admin.parkirs']);
+    Route::get('/parkir/export', [AdminParkirController::class, 'export'])->name('admin.parkir.export');
+    Route::resource('/users', AdminUserController::class, ['names' => 'admin.users']);
+    Route::resource('/kritik-saran', AdminKritikSaranController::class, ['names' => 'admin.kritik']);
 
 });
 

@@ -24,6 +24,7 @@ class Parkir extends Model
         'status',
         'tipe_roda',
         'user_id',
+        'foto_pembayaran',
         'slug'
     ];
 
