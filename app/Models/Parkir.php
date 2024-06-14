@@ -8,13 +8,13 @@ use App\Http\Traits\UsesUuid;
 use App\Http\Traits\NameHasSlug;
 class Parkir extends Model
 {
-    use HasFactory;
-    use NameHasSlug, UsesUuid;
+    use HasFactory, UsesUuid, NameHasSlug;
+
     protected $table = 'parkirs';
 
     protected $fillable = [
         'name',
-        'nik',
+        'ktp',
         'plat',
         'stnk',
         'warna',
@@ -23,10 +23,17 @@ class Parkir extends Model
         'alamat',
         'status',
         'tipe_roda',
-        'user_id',
         'foto_pembayaran',
-        'slug'
+        'lokasi',
+        'tanggal_transfer',
+        'jumlah_transfer',
+        'user_id',
+        'slug',
     ];
 
-
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 }
+

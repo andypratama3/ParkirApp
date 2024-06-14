@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Middleware;
 
 use Closure;
@@ -11,22 +10,21 @@ class RoleMiddleware
     /**
      * Handle an incoming request.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param  \Closure  $next
+     * @param  mixed  ...$roles
+     * @return mixed
      */
-    public function handle(Request $request, Closure $next, ...$roles): \Illuminate\Http\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+    public function handle(Request $request, Closure $next, ...$roles)
     {
-
-        if (in_array(Auth::user()->roles, $roles)) {
-            return $next($request);
-        }else{
-            abort(404);
+        if(Auth::check()) {
+            if (in_array(Auth::user()->role, $roles)) {
+                return $next($request);
+            } else {
+                return redirect()->route('landing.index')->with('error', 'Anda Tidak Memiliki Akses');
+            }
+        }else {
+            return redirect()->route('login')->with('error', 'Silahkan Login Terlebih Dahulu');
         }
 
-        if (in_array('admin', $roles)) {
-            return redirect()->route('admin.index');
-        }
-
-        
     }
 }
-

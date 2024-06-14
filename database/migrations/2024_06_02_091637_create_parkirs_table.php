@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('parkirs', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name');
-            $table->string('nik');
+            $table->string('ktp');
             $table->string('plat');
             $table->string('stnk');
             $table->string('warna');
@@ -24,6 +24,9 @@ return new class extends Migration
             $table->string('status');
             $table->string('tipe_roda');
             $table->string('foto_pembayaran');
+            $table->string('lokasi');
+            $table->date('tanggal_transfer');
+            $table->string('jumlah_transfer');
             $table->foreignUuid('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('slug');
             $table->softDeletes();

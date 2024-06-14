@@ -69,7 +69,7 @@
                                         @csrf
                                         @method('delete')
                                     </form>
-                                    <i class="fas fa-trash"></i>
+                                    <i class="fa fa-trash"></i>
                             </td>
                         </tr>
                         @empty

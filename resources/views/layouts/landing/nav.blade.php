@@ -17,6 +17,11 @@
           <li><a href="#kebijakan">Kebijakan</a></li>
           <li><a href="#lokasi-parkir">Lokasi Parkir</a></li>
           <li><a href="#kontak">Kontak</a></li>
+          @auth
+
+          @if(Auth::user()->role == 'admin')
+            <li><a href="{{ route('admin.index') }}">Dashboard</a></li>
+          @else
           <li>
             <form action="{{ route('logout') }}" method="POST">
                 @csrf
@@ -26,6 +31,9 @@
                 </a>
             </form>
           </li>
+          @endif
+          @endauth
+
         @else
             <li><a href="/#hero" class="">Home<br></a></li>
             <li><a href="/#visi_misi">Visi Misi</a></li>

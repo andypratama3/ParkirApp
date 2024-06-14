@@ -1,6 +1,6 @@
 @extends('layouts.landing')
+@section('title', 'Dashboard')
 @section('content')
-
 
     <!-- Hero Section -->
     <section id="hero" class="hero section">

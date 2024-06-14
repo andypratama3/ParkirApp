@@ -21,13 +21,16 @@ class ParkirController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'nik' => 'unique:parkirs|required',
+            'ktp' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|required',
             'plat' => 'unique:parkirs|required',
             'warna' => 'required',
             'tanggal_lahir' => 'required',
             'hp' => 'required',
             'alamat' => 'required',
             'tipe_roda' => 'required',
+            'lokasi' => 'required',
+            'tanggal_transfer' => 'required',
+            'jumlah_transfer' => 'required',
             'stnk' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|required',
             'foto_pembayaran' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|required',
 
@@ -51,8 +54,15 @@ class ParkirController extends Controller
             $foto_pembayaran->storeAs('public/pembayaran', $picture_name_pembayaran);
         }
 
+        $foto_ktp = $request->ktp;
+        if($foto_ktp) {
+            $ext = $foto_ktp->getClientOriginalExtension();
+            $picture_name_ktp = 'ktp_'.$request->name.'.'.$ext;
+            $foto_ktp->storeAs('public/ktp', $picture_name_ktp);
+        }
+
+
         $parkir->name = $request->name;
-        $parkir->nik = $request->nik;
         $parkir->plat = $request->plat;
         $parkir->stnk = $picture_name;
         $parkir->warna = $request->warna;
@@ -61,10 +71,14 @@ class ParkirController extends Controller
         $parkir->alamat = $request->alamat;
         $parkir->status = 'pending';
         $parkir->tipe_roda = $request->tipe_roda;
+        $parkir->lokasi = $request->lokasi;
+        $parkir->tanggal_transfer = $request->tanggal_transfer;
+        $parkir->jumlah_transfer = $request->jumlah_transfer;
+        $parkir->ktp = $picture_name_ktp;
         $parkir->foto_pembayaran = $picture_name_pembayaran;
         $parkir->user_id = Auth::id();
         $parkir->save();
 
-        return redirect()->back();
+        return redirect()->route('parkir.index')->with('success','Berhasil Mendaftar Parkir');
     }
 }

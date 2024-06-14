@@ -34,11 +34,9 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="nik">NIK</label>
-                                    <input type="text" name="nik"
-                                        class="form-control @error('nik') is-invalid @enderror"
-                                        value="{{ old('nik') }}">
-                                    @error('nik')
+                                    <label for="nik">KTP</label>
+                                    <input type="file" name="ktp" class="form-control @error('ktp') is-invalid @enderror" value="{{ old('ktp') }}">
+                                    @error('ktp')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
@@ -134,7 +132,19 @@
                                 </div>
                             </div>
 
-    
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="lokasi">lokasi</label>
+                                    <input type="text" name="lokasi"
+                                        class="form-control @error('lokasi') is-invalid @enderror"
+                                        value="{{ old('lokasi') }}">
+                                    @error('lokasi')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
+                                </div>
+                            </div>
 
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -177,7 +187,18 @@
                                     <input type="file" class="form-control" name="foto_pembayaran" value="{{ old('foto_pembayaran') }}">
                                 </div>
                             </div>
-
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="">Tanggal Transfer</label>
+                                    <input type="date" class="form-control" name="tanggal_transfer" value="{{ old('tanggal_transfer') }}">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="">Jumlah Transfer</label>
+                                    <input type="text" class="form-control" name="jumlah_transfer" value="{{ old('jumlah_transfer') }}">
+                                </div>
+                            </div>
                             <div class="col-md-12 mt-2">
                                 <a href="{{ route('landing.index') }}" class="btn btn-danger">Kembali</a>
                                 <button type="submit" class="btn btn-primary float-end">Simpan</button>
@@ -202,15 +223,13 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="nik">NIK</label>
-                                <input type="text" name="nik" readonly
-                                    class="form-control @error('nik') is-invalid @enderror"
-                                    value="{{ $parkir->nik ?? old('nik') }}">
-                                @error('nik')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
+                                <label for="ktp">KTP</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <a target="__blank" href="{{ asset('storage/ktp/'.$parkir->ktp ?? '') }}" class="input-group-text font-weight-bold" id="basic-addon1"
+                                            style="color: black;">Lihat Foto KTP</a>
+                                    </div>
                                 </div>
-                                @enderror
                             </div>
                         </div>
 
@@ -237,17 +256,9 @@
                             <div class="form-group">
                                 <label>Stnk</label>
                                 <div class="input-group">
-                                    <input type="file" name="stnk" readonly accept="image/*" value="{{ old('stnk') }}">
-                                    <div class="input-group-prepend">
-                                        <a target="__blank" href="{{ asset('storage/stnk/'.$parkir->stnk ?? '') }}" class="input-group-text font-weight-bold" id="basic-addon1"
-                                            style="color: black;">Lihat Foto STNK</a>
-                                    </div>
+                                    <a target="__blank" href="{{ asset('storage/stnk/'.$parkir->stnk ?? '') }}" class="input-group-text font-weight-bold" id="basic-addon1"
+                                        style="color: black;">Lihat Foto STNK</a>
                                 </div>
-                                @error('stnk')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                                @enderror
                             </div>
                         </div>
 
@@ -308,11 +319,11 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="status">Status</label>
-                                <input type="text" name="status" readonly
-                                    class="form-control @error('status') is-invalid @enderror"
-                                    value="{{ $parkir->status ?? old('status') }}">
-                                @error('status')
+                                <label for="lokasi">lokasi</label>
+                                <input type="text" name="lokasi" readonly
+                                    class="form-control @error('lokasi') is-invalid @enderror"
+                                    value="{{ $parkir->lokasi ?? old('lokasi') }}">
+                                @error('lokasi')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
@@ -339,27 +350,25 @@
                                 @enderror
                             </div>
                         </div>
+
                         <h5 class="card-title text-center mt-4">Pembayaran</h5>
 
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="form-group">
-                                <label>Foto Pembayaran</label>
+                                <label for="">Bank</label>
+                                <input type="text" class="form-control" name="bank" value="8976545468798765 ( BNI )" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="">Bukti Pembayaran</label>
                                 <div class="input-group">
-                                    <input type="file" name="stnk" readonly accept="image/*" value="{{ old('stnk') }}">
-                                    <div class="input-group-prepend">
-                                        <a target="__blank" href="{{ asset('storage/pembayaran/'.$parkir->foto_pembayaran ?? '') }}" class="input-group-text font-weight-bold" id="basic-addon1"
-                                            style="color: black;">Lihat Foto Pembayaran</a>
-                                    </div>
+                                    <a target="__blank" href="{{ asset('storage/pembayaran/'.$parkir->foto_pembayaran ?? '') }}" class="input-group-text font-weight-bold" id="basic-addon1" style="color: black;">Lihat Bukti Pembayaran</a>
                                 </div>
-                                @error('stnk')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                                @enderror
                             </div>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <label for="status">Status</label>
                                 <input type="text" name="status" readonly
@@ -372,8 +381,17 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-md-12 mt-4">
-                            <a href="{{ route('landing.index') }}" class="btn btn-danger float-start">Kembali</a>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="">Tanggal Transfer</label>
+                                <input type="text" class="form-control" name="tanggal_transfer" value="{{ $parkir->tanggal_transfer ?? old('tanggal_transfer') }}" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="">Jumlah Transfer</label>
+                                <input type="text" class="form-control" name="jumlah_transfer" value="{{ $parkir->jumlah_transfer ?? old('jumlah_transfer') }}" readonly>
+                            </div>
                         </div>
                     </div>
                     @endif

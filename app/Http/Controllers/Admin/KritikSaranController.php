@@ -23,6 +23,6 @@ class KritikSaranController extends Controller
     {
         $kritik = KritikSaran::where('id', $kritik)->first();
         $kritik->delete();
-        return redirect()->route('admin.kritik.index');
+        return redirect()->route('admin.kritik.index')->with('success', 'Berhasil Menghapus Data');
     }
 }

@@ -21,10 +21,10 @@
                         </div>
                 </div>
                 </form>
-                <div class="col-md-6 mb-2">
+                {{-- <div class="col-md-6 mb-2">
                     <a href="{{ route('admin.pendaftar.parkir.create') }}" class="btn btn-primary btn-sm float-end"><i
                             class="fa fa-plus">Tambah</i></a>
-                </div>
+                </div> --}}
 
                 <table class="table table-bordered table-striped" >
                     <thead>
